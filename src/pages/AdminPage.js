@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Sidebar from "../components/admin/Sidebar";
 import Header from "../components/admin/Header";
 import Overview from "../components/admin/Overview";
+import PatientsManagement from "../components/admin/PatientsManagement";
+import PatientForm from "../components/admin/PatientForm";
+import RegistrationsView from "../components/admin/RegistrationsView";
+import MedicinesManagement from "../components/admin/MedicinesManagement";
 
 const AdminPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -16,7 +21,14 @@ const AdminPage = () => {
         <Header setSidebarOpen={setSidebarOpen} />
 
         <main className="py-6 px-4 sm:px-6 lg:px-8">
-          <Overview />
+          <Routes>
+            <Route path="/" element={<Overview />} />
+            <Route path="/patients" element={<PatientsManagement />} />
+            <Route path="/patients/new" element={<PatientForm />} />
+            <Route path="/patients/edit/:id" element={<PatientForm />} />
+            <Route path="/registrations" element={<RegistrationsView />} />
+            <Route path="/medicines" element={<MedicinesManagement />} />
+          </Routes>
         </main>
       </div>
     </div>

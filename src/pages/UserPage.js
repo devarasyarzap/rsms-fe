@@ -3,16 +3,14 @@ import { Link } from "react-router-dom";
 
 const UserPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  RSMS
-                </h1>
+                <h1 className="text-2xl font-bold text-blue-600">RSMS</h1>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -35,9 +33,7 @@ const UserPage = () => {
         <div className="text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
             Sistem Manajemen
-            <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Modern & Efisien
-            </span>
+            <span className="block text-blue-600">Modern & Efisien</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Kelola bisnis Anda dengan mudah menggunakan platform manajemen yang
@@ -136,7 +132,7 @@ const UserPage = () => {
 
       {/* Stats Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 sm:p-12">
+        <div className="bg-blue-600 rounded-3xl p-8 sm:p-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center text-white">
             <div>
               <div className="text-4xl font-bold mb-2">10K+</div>
