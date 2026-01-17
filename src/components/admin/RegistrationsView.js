@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { API_ENDPOINTS } from "../../config/api";
 
 const RegistrationsView = () => {
   const [registrations, setRegistrations] = useState([]);
+  const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3005";
 
   const fetchRegistrations = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(API_ENDPOINTS.REGISTRATIONS, {
+      const response = await fetch(`${API_BASE_URL}/api/registrations`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -77,8 +77,8 @@ const RegistrationsView = () => {
                       reg.status === "pending"
                         ? "bg-yellow-100 text-yellow-800"
                         : reg.status === "completed"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-gray-100 text-gray-800"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-gray-100 text-gray-800"
                     }`}
                   >
                     {reg.status}

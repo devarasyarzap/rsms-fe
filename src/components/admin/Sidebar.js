@@ -15,6 +15,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const navigation = [
     { name: "Dashboard", href: "/admin", icon: HomeIcon },
+    { name: "Users", href: "/admin/users", icon: UsersIcon },
     { name: "Patients", href: "/admin/patients", icon: UsersIcon },
     {
       name: "Registrations",

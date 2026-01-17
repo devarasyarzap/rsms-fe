@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { API_ENDPOINTS } from "../../config/api";
 
 const Overview = () => {
   const [stats, setStats] = useState({
@@ -8,6 +7,7 @@ const Overview = () => {
     totalRegistrations: 0,
     totalMedicines: 0,
   });
+  const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3005";
 
   useEffect(() => {
     fetchStats();
@@ -16,14 +16,17 @@ const Overview = () => {
   const fetchStats = async () => {
     try {
       const token = localStorage.getItem("token");
-      const patientsRes = await fetch(API_ENDPOINTS.PATIENTS, {
+      const patientsRes = await fetch(`${API_BASE_URL}/api/patients/data`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const patientsData = await patientsRes.json();
 
-      const medicinesRes = await fetch(API_ENDPOINTS.MEDICINES, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const medicinesRes = await fetch(
+        `${API_BASE_URL}/api/pharmacy/medicines`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       const medicinesData = await medicinesRes.json();
 
       setStats({

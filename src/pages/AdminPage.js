@@ -3,10 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import Sidebar from "../components/admin/Sidebar";
 import Header from "../components/admin/Header";
 import Overview from "../components/admin/Overview";
-import PatientsManagement from "../components/admin/PatientsManagement";
-import PatientForm from "../components/admin/PatientForm";
+import PatientsManagement from "../components/admin/Patients/PatientsManagement";
+import PatientForm from "../components/admin/Patients/PatientForm";
 import RegistrationsView from "../components/admin/RegistrationsView";
 import MedicinesManagement from "../components/admin/MedicinesManagement";
+import UsersManagement from "../components/admin/Users/UsersManagement";
+import UsersCreate from "../components/admin/Users/UsersCreate";
 
 const AdminPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -23,6 +25,8 @@ const AdminPage = () => {
         <main className="py-6 px-4 sm:px-6 lg:px-8">
           <Routes>
             <Route path="/" element={<Overview />} />
+            <Route path="/users" element={<UsersManagement />} />
+            <Route path="/users/new" element={<UsersCreate />} />
             <Route path="/patients" element={<PatientsManagement />} />
             <Route path="/patients/new" element={<PatientForm />} />
             <Route path="/patients/edit/:id" element={<PatientForm />} />

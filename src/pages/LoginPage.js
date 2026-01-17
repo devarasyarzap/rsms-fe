@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_ENDPOINTS } from "../config/api";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -10,6 +9,7 @@ const LoginPage = () => {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3005";
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +23,7 @@ const LoginPage = () => {
     setError("");
 
     try {
-      const response = await fetch(API_ENDPOINTS.LOGIN, {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const LoginPage = () => {
         navigate("/admin");
       } else {
         setError(
-          data.message || "Login failed. Please check your credentials."
+          data.message || "Login failed. Please check your credentials.",
         );
       }
     } catch (error) {

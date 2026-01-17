@@ -1,58 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { API_ENDPOINTS } from "../../config/api";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const PatientForm = () => {
+const PatientCreate = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const isEditMode = Boolean(id);
 
   const [formData, setFormData] = useState({
     nik: "",
-    full_name: "",
-    birth_date: "",
-    gender: "M",
+    name: "",
+    date_of_birth: "",
+    gender: "",
     address: "",
-    phone_number: "",
+    phone: "",
+    user_id: "",
   });
   const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
-
-  // Fetch patient data if editing
-  useEffect(() => {
-    if (isEditMode) {
-      fetchPatient();
-    }
-  }, [id]);
-
-  const fetchPatient = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(`${API_ENDPOINTS.PATIENTS}/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setFormData({
-          nik: data.data.nik || "",
-          full_name: data.data.full_name || "",
-          birth_date: data.data.birth_date || "",
-          gender: data.data.gender || "M",
-          address: data.data.address || "",
-          phone_number: data.data.phone_number || "",
-        });
-      }
-    } catch (error) {
-      console.error("Error fetching patient:", error);
-      setError("Failed to load patient data");
-    }
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const newFormData = { ...formData, [name]: value };
+    setFormData(newFormData);
     setError("");
   };
 
@@ -63,19 +31,18 @@ const PatientForm = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const url = isEditMode
-        ? `${API_ENDPOINTS.PATIENTS}/${id}`
-        : API_ENDPOINTS.PATIENTS;
-      const method = isEditMode ? "PUT" : "POST";
 
-      const response = await fetch(url, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/patients/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
         },
-        body: JSON.stringify(formData),
-      });
+      );
 
       if (response.ok) {
         navigate("/admin/patients");
@@ -91,9 +58,30 @@ const PatientForm = () => {
     }
   };
 
+  const fetchUsers = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/auth/users`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      const data = await response.json();
+      setUsers(data.data || []);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <button
@@ -115,13 +103,9 @@ const PatientForm = () => {
             </svg>
             Back to Patients
           </button>
-          <h2 className="text-3xl font-bold text-gray-900">
-            {isEditMode ? "Edit Patient" : "Add New Patient"}
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-900">Add New Patient</h2>
           <p className="text-gray-500 mt-1">
-            {isEditMode
-              ? "Update patient information below"
-              : "Fill in the patient details below"}
+            Fill in the patient details below
           </p>
         </div>
       </div>
@@ -150,34 +134,6 @@ const PatientForm = () => {
 
       {/* Form Card */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div className="bg-blue-600 px-8 py-6">
-          <div className="flex items-center space-x-3">
-            <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-white">
-                Patient Information
-              </h3>
-              <p className="text-blue-100 text-sm">
-                Please provide accurate information
-              </p>
-            </div>
-          </div>
-        </div>
-
         <form onSubmit={handleSubmit} className="p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* NIK */}
@@ -212,6 +168,43 @@ const PatientForm = () => {
               />
             </div>
 
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-gray-700">
+                <span className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                    />
+                  </svg>
+                  Users
+                  <span className="text-red-500">*</span>
+                </span>
+              </label>
+              <select
+                name="user_id"
+                value={formData.user_id}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-white"
+              >
+                <option value="" disabled>
+                  Pilih User
+                </option>
+                {users.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.full_name} ({user.username})
+                  </option>
+                ))}
+              </select>
+            </div>
+
             {/* Full Name */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
@@ -235,8 +228,8 @@ const PatientForm = () => {
               </label>
               <input
                 type="text"
-                name="full_name"
-                value={formData.full_name}
+                name="name"
+                value={formData.name}
                 onChange={handleInputChange}
                 placeholder="Enter full name"
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none"
@@ -267,8 +260,8 @@ const PatientForm = () => {
               </label>
               <input
                 type="tel"
-                name="phone_number"
-                value={formData.phone_number}
+                name="phone"
+                value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="08xx-xxxx-xxxx"
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none"
@@ -299,8 +292,8 @@ const PatientForm = () => {
               </label>
               <input
                 type="date"
-                name="birth_date"
-                value={formData.birth_date}
+                name="date_of_birth"
+                value={formData.date_of_birth}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none"
                 required
@@ -334,8 +327,11 @@ const PatientForm = () => {
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-white"
               >
-                <option value="M">Male</option>
-                <option value="F">Female</option>
+                <option value="" disabled>
+                  Pilih Gender
+                </option>
+                <option value="L">Laki Laki</option>
+                <option value="P">Perempuan</option>
               </select>
             </div>
 
@@ -444,7 +440,7 @@ const PatientForm = () => {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  {isEditMode ? "Update Patient" : "Create Patient"}
+                  Create Patient
                 </>
               )}
             </button>
@@ -455,4 +451,4 @@ const PatientForm = () => {
   );
 };
 
-export default PatientForm;
+export default PatientCreate;

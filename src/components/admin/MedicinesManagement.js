@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { API_ENDPOINTS } from "../../config/api";
 
 const MedicinesManagement = () => {
   const [medicines, setMedicines] = useState([]);
@@ -9,11 +8,12 @@ const MedicinesManagement = () => {
     stock: "",
     price: "",
   });
+  const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3005";
 
   const fetchMedicines = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(API_ENDPOINTS.MEDICINES, {
+      const response = await fetch(`${API_BASE_URL}/api/pharmacy/medicines`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -36,7 +36,7 @@ const MedicinesManagement = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(API_ENDPOINTS.MEDICINES, {
+      const response = await fetch(`${API_BASE_URL}/api/pharmacy/medicines`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
