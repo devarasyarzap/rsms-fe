@@ -62,7 +62,7 @@ const PatientCreate = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/auth/users`,
+        `${process.env.REACT_APP_API_URL}/api/master/users`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

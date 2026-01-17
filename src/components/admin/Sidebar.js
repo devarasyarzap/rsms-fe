@@ -17,6 +17,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     { name: "Dashboard", href: "/admin", icon: HomeIcon },
     { name: "Users", href: "/admin/users", icon: UsersIcon },
     { name: "Patients", href: "/admin/patients", icon: UsersIcon },
+    { name: "Polyclinics", href: "/admin/polys", icon: UsersIcon },
     {
       name: "Registrations",
       href: "/admin/registrations",
