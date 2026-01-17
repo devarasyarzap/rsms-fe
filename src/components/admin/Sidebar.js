@@ -18,12 +18,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     { name: "Users", href: "/admin/users", icon: UsersIcon },
     { name: "Patients", href: "/admin/patients", icon: UsersIcon },
     { name: "Polyclinics", href: "/admin/polys", icon: UsersIcon },
+    { name: "Medicines", href: "/admin/medicines", icon: PillIcon },
     {
       name: "Registrations",
       href: "/admin/registrations",
       icon: ClipboardIcon,
     },
-    { name: "Medicines", href: "/admin/medicines", icon: PillIcon },
   ];
 
   return (

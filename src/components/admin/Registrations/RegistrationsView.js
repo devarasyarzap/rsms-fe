@@ -27,9 +27,6 @@ const RegistrationsView = () => {
         <h2 className="text-2xl font-bold text-gray-900">
           Patient Registrations
         </h2>
-        <p className="text-gray-500 mt-1">
-          View all patient registrations (Read-only)
-        </p>
       </div>
 
       <div className="bg-white rounded-lg shadow overflow-hidden">
