@@ -14,6 +14,7 @@ import PolysCreate from "../components/admin/Poli/PolysCreate";
 import MedicineCreate from "../components/admin/Medicine/MedicineCreate";
 import DoctorManagement from "../components/admin/Doctor/DoctorManagement";
 import DoctorCreate from "../components/admin/Doctor/DoctorCreate";
+import RegistrationsCreate from "../components/admin/Registrations/RegistrationsCreate";
 
 const AdminPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -41,6 +42,10 @@ const AdminPage = () => {
             <Route path="/doctor" element={<DoctorManagement />} />
             <Route path="/doctor/new" element={<DoctorCreate />} />
             <Route path="/registrations" element={<RegistrationsView />} />
+            <Route
+              path="/registrations/new"
+              element={<RegistrationsCreate />}
+            />
           </Routes>
         </main>
       </div>

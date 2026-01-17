@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  IoChevronBack,
+  IoAlertCircle,
+  IoPeople,
+  IoCard,
+  IoCall,
+  IoClose,
+  IoCheckmark,
+} from "react-icons/io5";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaHospital, FaStethoscope } from "react-icons/fa";
 
 const DoctorCreate = () => {
   const navigate = useNavigate();
@@ -105,19 +116,7 @@ const DoctorCreate = () => {
             onClick={() => navigate("/admin/doctor")}
             className="flex items-center text-gray-600 hover:text-gray-900 mb-4 transition-colors"
           >
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
+            <IoChevronBack className="w-5 h-5 mr-2" />
             Back
           </button>
           <h2 className="text-3xl font-bold text-gray-900">Add New Doctor</h2>
@@ -129,19 +128,7 @@ const DoctorCreate = () => {
       {error && (
         <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
           <div className="flex items-center">
-            <svg
-              className="w-5 h-5 text-red-500 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <IoAlertCircle className="w-5 h-5 text-red-500 mr-2" />
             <p className="text-red-700 font-medium">{error}</p>
           </div>
         </div>
@@ -155,19 +142,7 @@ const DoctorCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
+                  <IoPeople className="w-4 h-4 text-blue-600" />
                   Users
                   <span className="text-red-500">*</span>
                 </span>
@@ -191,19 +166,7 @@ const DoctorCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
+                  <FaHospital className="w-4 h-4 text-blue-600" />
                   Polyclinics
                   <span className="text-red-500">*</span>
                 </span>
@@ -229,19 +192,7 @@ const DoctorCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
+                  <IoCard className="w-4 h-4 text-blue-600" />
                   SIP Number
                   <span className="text-red-500">*</span>
                 </span>
@@ -261,19 +212,7 @@ const DoctorCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                    />
-                  </svg>
+                  <FaStethoscope className="w-4 h-4 text-blue-600" />
                   Specialization
                   <span className="text-red-500">*</span>
                 </span>
@@ -283,7 +222,7 @@ const DoctorCreate = () => {
                 name="specialization"
                 value={formData.specialization}
                 onChange={handleInputChange}
-                placeholder="08xx-xxxx-xxxx"
+                placeholder="Enter Specialization"
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none"
                 required
               />
@@ -298,19 +237,7 @@ const DoctorCreate = () => {
               className="px-6 py-3 border-2 border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all flex items-center gap-2"
               disabled={loading}
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <IoClose className="w-5 h-5" />
               Cancel
             </button>
             <button
@@ -320,42 +247,12 @@ const DoctorCreate = () => {
             >
               {loading ? (
                 <>
-                  <svg
-                    className="animate-spin h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
+                  <AiOutlineLoading3Quarters className="animate-spin h-5 w-5" />
                   Saving...
                 </>
               ) : (
                 <>
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
+                  <IoCheckmark className="w-5 h-5" />
                   Create Doctor
                 </>
               )}

@@ -1,5 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  IoChevronBack,
+  IoAlertCircle,
+  IoCard,
+  IoPersonCircle,
+  IoCall,
+  IoCalendar,
+  IoPeople,
+  IoLocationSharp,
+  IoClose,
+  IoCheckmark,
+} from "react-icons/io5";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { TbGenderBigender } from "react-icons/tb";
 
 const PatientCreate = () => {
   const navigate = useNavigate();
@@ -88,20 +102,8 @@ const PatientCreate = () => {
             onClick={() => navigate("/admin/patients")}
             className="flex items-center text-gray-600 hover:text-gray-900 mb-4 transition-colors"
           >
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            Back to Patients
+            <IoChevronBack className="w-5 h-5 mr-2" />
+            Back
           </button>
           <h2 className="text-3xl font-bold text-gray-900">Add New Patient</h2>
           <p className="text-gray-500 mt-1">
@@ -114,19 +116,7 @@ const PatientCreate = () => {
       {error && (
         <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
           <div className="flex items-center">
-            <svg
-              className="w-5 h-5 text-red-500 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <IoAlertCircle className="w-5 h-5 text-red-500 mr-2" />
             <p className="text-red-700 font-medium">{error}</p>
           </div>
         </div>
@@ -140,19 +130,7 @@ const PatientCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
-                    />
-                  </svg>
+                  <IoCard className="w-4 h-4 text-blue-600" />
                   NIK
                   <span className="text-red-500">*</span>
                 </span>
@@ -171,19 +149,7 @@ const PatientCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
+                  <IoPeople className="w-4 h-4 text-blue-600" />
                   Users
                   <span className="text-red-500">*</span>
                 </span>
@@ -209,19 +175,7 @@ const PatientCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
+                  <IoPersonCircle className="w-4 h-4 text-blue-600" />
                   Full Name
                   <span className="text-red-500">*</span>
                 </span>
@@ -241,19 +195,7 @@ const PatientCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                    />
-                  </svg>
+                  <IoCall className="w-4 h-4 text-blue-600" />
                   Phone Number
                   <span className="text-red-500">*</span>
                 </span>
@@ -273,19 +215,7 @@ const PatientCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
+                  <IoCalendar className="w-4 h-4 text-blue-600" />
                   Date of Birth
                   <span className="text-red-500">*</span>
                 </span>
@@ -304,19 +234,7 @@ const PatientCreate = () => {
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
+                  <TbGenderBigender className="w-4 h-4 text-blue-600" />
                   Gender
                   <span className="text-red-500">*</span>
                 </span>
@@ -339,25 +257,7 @@ const PatientCreate = () => {
             <div className="space-y-2 md:col-span-2">
               <label className="block text-sm font-semibold text-gray-700">
                 <span className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
+                  <IoLocationSharp className="w-4 h-4 text-blue-600" />
                   Address
                   <span className="text-red-500">*</span>
                 </span>
@@ -382,19 +282,7 @@ const PatientCreate = () => {
               className="px-6 py-3 border-2 border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all flex items-center gap-2"
               disabled={loading}
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <IoClose className="w-5 h-5" />
               Cancel
             </button>
             <button
@@ -404,42 +292,12 @@ const PatientCreate = () => {
             >
               {loading ? (
                 <>
-                  <svg
-                    className="animate-spin h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
+                  <AiOutlineLoading3Quarters className="animate-spin h-5 w-5" />
                   Saving...
                 </>
               ) : (
                 <>
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
+                  <IoCheckmark className="w-5 h-5" />
                   Create Patient
                 </>
               )}

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { IoAdd } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationsView = () => {
+  const navigate = useNavigate();
   const [registrations, setRegistrations] = useState([]);
   const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3005";
 
@@ -23,10 +26,17 @@ const RegistrationsView = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900">
-          Patient Registrations
-        </h2>
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">Registrations</h2>
+        </div>
+        <button
+          onClick={() => navigate("/admin/registrations/new")}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition-colors shadow-lg hover:shadow-xl"
+        >
+          <IoAdd className="w-5 h-5" />
+          Add Registrasions
+        </button>
       </div>
 
       <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -54,16 +64,17 @@ const RegistrationsView = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
+            {console.log(registrations)}
             {registrations.map((reg) => (
               <tr key={reg.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {reg.id}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {reg.patient_id}
+                  {reg.Patient.name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {reg.doctor_id}
+                  {reg.Doctor.User.full_name}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-500">
                   {reg.complaint}
