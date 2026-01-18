@@ -17,6 +17,8 @@ import DoctorCreate from "../components/admin/Doctor/DoctorCreate";
 import RegistrationsCreate from "../components/admin/Registrations/RegistrationsCreate";
 import ProtectedRoute from "../components/ProtectedRoute";
 import RegistrationsSelf from "../components/admin/Registrations/RegistrationsSelf";
+import QueueManagement from "../components/admin/Queue/QueueManagement";
+import QueueExamine from "../components/admin/Queue/QueueExamine";
 
 const PanelPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -56,6 +58,22 @@ const PanelPage = () => {
               element={<RegistrationsCreate />}
             />
             <Route path="/registrations/self" element={<RegistrationsSelf />} />
+            <Route
+              path="/queue"
+              element={
+                <ProtectedRoute allowedRoles={["dokter"]}>
+                  <QueueManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/queue/:id"
+              element={
+                <ProtectedRoute allowedRoles={["dokter"]}>
+                  <QueueExamine />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
       </div>

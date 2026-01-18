@@ -6,6 +6,7 @@ import { HiDotsVertical } from "react-icons/hi";
 import { FaHospital, FaHospitalUser } from "react-icons/fa";
 import { FaUserDoctor } from "react-icons/fa6";
 import { useAuth } from "../../contexts/AuthContext";
+import { MdQueue } from "react-icons/md";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
@@ -30,9 +31,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       { name: "Dashboard", href: "/panel", icon: HiHome },
       { name: "Patients", href: "/panel/patients", icon: FaHospitalUser },
       {
-        name: "Registrations",
-        href: "/panel/registrations",
-        icon: HiClipboardList,
+        name: "My Queues",
+        href: "/panel/queue",
+        icon: MdQueue,
       },
     ],
     apoteker: [
