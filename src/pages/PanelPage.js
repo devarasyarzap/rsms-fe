@@ -19,6 +19,10 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import RegistrationsSelf from "../components/admin/Registrations/RegistrationsSelf";
 import QueueManagement from "../components/admin/Queue/QueueManagement";
 import QueueExamine from "../components/admin/Queue/QueueExamine";
+import WardClassManagement from "../components/admin/WardClass/WardClassManagement";
+import WardClassCreate from "../components/admin/WardClass/WardClassCreate";
+import BedsManagement from "../components/admin/Beds/BedsManagement";
+import BedsCreate from "../components/admin/Beds/BedsCreate";
 
 const PanelPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -43,6 +47,10 @@ const PanelPage = () => {
             <Route path="/patients/new" element={<PatientCreate />} />
             <Route path="/medicines" element={<MedicinesManagement />} />
             <Route path="/medicines/new" element={<MedicineCreate />} />
+            <Route path="/ward-classes" element={<WardClassManagement />} />
+            <Route path="/ward-classes/new" element={<WardClassCreate />} />
+            <Route path="/beds" element={<BedsManagement />} />
+            <Route path="/beds/new" element={<BedsCreate />} />
             <Route
               path="/doctor"
               element={
