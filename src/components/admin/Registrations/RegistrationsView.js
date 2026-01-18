@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { IoAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const RegistrationsView = () => {
   const navigate = useNavigate();
   const [registrations, setRegistrations] = useState([]);
   const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3005";
+  const { user } = useAuth();
 
   const fetchRegistrations = async () => {
     try {
@@ -30,13 +32,23 @@ const RegistrationsView = () => {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Registrations</h2>
         </div>
-        <button
-          onClick={() => navigate("/panel/registrations/new")}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition-colors shadow-lg hover:shadow-xl"
-        >
-          <IoAdd className="w-5 h-5" />
-          Add Registrasions
-        </button>
+        {user.role == "pasien" ? (
+          <button
+            onClick={() => navigate("/panel/registrations/self")}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition-colors shadow-lg hover:shadow-xl"
+          >
+            <IoAdd className="w-5 h-5" />
+            Registrasions Visit
+          </button>
+        ) : (
+          <button
+            onClick={() => navigate("/panel/registrations/new")}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition-colors shadow-lg hover:shadow-xl"
+          >
+            <IoAdd className="w-5 h-5" />
+            Add Registrasions
+          </button>
+        )}
       </div>
 
       <div className="bg-white rounded-lg shadow overflow-hidden">

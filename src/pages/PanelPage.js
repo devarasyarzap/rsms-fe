@@ -16,6 +16,7 @@ import DoctorManagement from "../components/admin/Doctor/DoctorManagement";
 import DoctorCreate from "../components/admin/Doctor/DoctorCreate";
 import RegistrationsCreate from "../components/admin/Registrations/RegistrationsCreate";
 import ProtectedRoute from "../components/ProtectedRoute";
+import RegistrationsSelf from "../components/admin/Registrations/RegistrationsSelf";
 
 const PanelPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -54,6 +55,7 @@ const PanelPage = () => {
               path="/registrations/new"
               element={<RegistrationsCreate />}
             />
+            <Route path="/registrations/self" element={<RegistrationsSelf />} />
           </Routes>
         </main>
       </div>

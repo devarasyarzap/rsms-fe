@@ -43,7 +43,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       { name: "Dashboard", href: "/panel", icon: HiHome },
       { name: "Patients", href: "/panel/patients", icon: FaHospitalUser },
     ],
-    pasien: [{ name: "Dashboard", href: "/panel", icon: HiHome }],
+    pasien: [
+      { name: "Dashboard", href: "/panel", icon: HiHome },
+      {
+        name: "Registrations",
+        href: "/panel/registrations",
+        icon: HiClipboardList,
+      },
+    ],
   };
 
   // Dapatkan navigation berdasarkan role user
