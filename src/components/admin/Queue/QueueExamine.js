@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   IoChevronBack,
   IoAlertCircle,
-  IoPersonCircle,
   IoMedkit,
   IoDocumentText,
   IoClose,
@@ -54,7 +53,7 @@ const QueueExamine = () => {
       );
 
       if (response.ok) {
-        navigate("/panel/registrations");
+        navigate("/panel/queue");
       } else {
         const data = await response.json();
         setError(
@@ -96,7 +95,7 @@ const QueueExamine = () => {
       <div className="flex items-center justify-between">
         <div>
           <button
-            onClick={() => navigate("/panel/registrations")}
+            onClick={() => navigate("/panel/queue")}
             className="flex items-center text-gray-600 hover:text-gray-900 mb-4 transition-colors"
           >
             <IoChevronBack className="w-5 h-5 mr-2" />

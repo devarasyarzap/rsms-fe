@@ -169,7 +169,7 @@ const PanelPage = () => {
             <Route
               path="/patients"
               element={
-                <ProtectedRoute allowedRoles={["admin", "kasir"]}>
+                <ProtectedRoute allowedRoles={["admin", "kasir", "dokter"]}>
                   <PatientsManagement />
                 </ProtectedRoute>
               }

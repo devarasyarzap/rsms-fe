@@ -16,6 +16,7 @@ const RegistrationsSelf = () => {
 
   const [formData, setFormData] = useState({
     doctor_id: "",
+    complaint: "",
   });
   const [loading, setLoading] = useState(false);
   const [doctors, setDoctors] = useState([]);

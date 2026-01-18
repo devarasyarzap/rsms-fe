@@ -127,7 +127,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <h1 className="text-lg font-semibold text-gray-900">
                 {config.title}
               </h1>
-              <p className="text-xs text-gray-500">{config.subtitle}</p>
             </div>
           </div>
 
