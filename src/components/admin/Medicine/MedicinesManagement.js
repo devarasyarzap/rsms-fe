@@ -33,7 +33,7 @@ const MedicinesManagement = () => {
           </h2>
         </div>
         <button
-          onClick={() => navigate("/admin/medicines/new")}
+          onClick={() => navigate("/panel/medicines/new")}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2"
         >
           <IoAdd className="w-5 h-5" />

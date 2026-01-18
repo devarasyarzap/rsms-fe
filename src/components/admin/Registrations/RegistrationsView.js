@@ -31,7 +31,7 @@ const RegistrationsView = () => {
           <h2 className="text-2xl font-bold text-gray-900">Registrations</h2>
         </div>
         <button
-          onClick={() => navigate("/admin/registrations/new")}
+          onClick={() => navigate("/panel/registrations/new")}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition-colors shadow-lg hover:shadow-xl"
         >
           <IoAdd className="w-5 h-5" />

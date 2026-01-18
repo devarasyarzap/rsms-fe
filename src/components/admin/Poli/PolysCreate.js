@@ -49,7 +49,7 @@ const PolysCreate = () => {
       );
 
       if (response.ok) {
-        navigate("/admin/polys");
+        navigate("/panel/polys");
       } else {
         const data = await response.json();
         setError(data.message || "Failed to save polys. Please try again.");
@@ -67,7 +67,7 @@ const PolysCreate = () => {
       <div className="flex items-center justify-between">
         <div>
           <button
-            onClick={() => navigate("/admin/polys")}
+            onClick={() => navigate("/panel/polys")}
             className="flex items-center text-gray-600 hover:text-gray-900 mb-4 transition-colors"
           >
             <IoChevronBack className="w-5 h-5 mr-2" />
@@ -140,7 +140,7 @@ const PolysCreate = () => {
           <div className="flex gap-3 justify-end mt-8 pt-6 border-t border-gray-200">
             <button
               type="button"
-              onClick={() => navigate("/admin/polys")}
+              onClick={() => navigate("/panel/polys")}
               className="px-6 py-3 border-2 border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all flex items-center gap-2"
               disabled={loading}
             >

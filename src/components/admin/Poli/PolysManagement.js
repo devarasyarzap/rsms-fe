@@ -36,7 +36,7 @@ const PolysManagement = () => {
           <h2 className="text-2xl font-bold text-gray-900">Polys Management</h2>
         </div>
         <button
-          onClick={() => navigate("/admin/polys/new")}
+          onClick={() => navigate("/panel/polys/new")}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition-colors shadow-lg hover:shadow-xl"
         >
           <IoAdd className="w-5 h-5" />
@@ -78,7 +78,7 @@ const PolysManagement = () => {
                 {/* <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <button
                     onClick={() =>
-                      navigate(`/admin/patients/edit/${patient.id}`)
+                      navigate(`/panel/patients/edit/${patient.id}`)
                     }
                     className="text-blue-600 hover:text-blue-800 font-medium mr-3 transition-colors"
                   >
