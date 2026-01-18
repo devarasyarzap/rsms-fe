@@ -8,6 +8,7 @@ import { FaUserDoctor } from "react-icons/fa6";
 import { useAuth } from "../../contexts/AuthContext";
 import { MdOutlineClass, MdQueue } from "react-icons/md";
 import { LiaBedSolid } from "react-icons/lia";
+import { PiHospitalThin } from "react-icons/pi";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
@@ -21,7 +22,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       { name: "Doctor", href: "/panel/doctor", icon: FaUserDoctor },
       { name: "Patients", href: "/panel/patients", icon: FaHospitalUser },
       { name: "Polyclinics", href: "/panel/polys", icon: FaHospital },
-      { name: "Medicines", href: "/panel/medicines", icon: GiMedicines },
       {
         name: "Ward Classes",
         href: "/panel/ward-classes",
@@ -53,7 +53,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     ],
     kasir: [
       { name: "Dashboard", href: "/panel", icon: HiHome },
+      { name: "Users", href: "/panel/users", icon: HiUsers },
       { name: "Patients", href: "/panel/patients", icon: FaHospitalUser },
+      { name: "Inpatients", href: "/panel/inpatients", icon: PiHospitalThin },
     ],
     pasien: [
       { name: "Dashboard", href: "/panel", icon: HiHome },

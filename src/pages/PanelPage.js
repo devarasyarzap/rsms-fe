@@ -23,6 +23,8 @@ import WardClassManagement from "../components/admin/WardClass/WardClassManageme
 import WardClassCreate from "../components/admin/WardClass/WardClassCreate";
 import BedsManagement from "../components/admin/Beds/BedsManagement";
 import BedsCreate from "../components/admin/Beds/BedsCreate";
+import InpatientManagement from "../components/admin/Inpatient/InpatientManagement";
+import InpatientCreate from "../components/admin/Inpatient/InpatientCreate";
 
 const PanelPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -38,19 +40,106 @@ const PanelPage = () => {
 
         <main className="py-6 px-4 sm:px-6 lg:px-8">
           <Routes>
+            {/* Public Dashboard */}
             <Route path="/" element={<Overview />} />
-            <Route path="/users" element={<UsersManagement />} />
-            <Route path="/users/new" element={<UsersCreate />} />
-            <Route path="/polys" element={<PolysManagement />} />
-            <Route path="/polys/new" element={<PolysCreate />} />
-            <Route path="/patients" element={<PatientsManagement />} />
-            <Route path="/patients/new" element={<PatientCreate />} />
-            <Route path="/medicines" element={<MedicinesManagement />} />
-            <Route path="/medicines/new" element={<MedicineCreate />} />
-            <Route path="/ward-classes" element={<WardClassManagement />} />
-            <Route path="/ward-classes/new" element={<WardClassCreate />} />
-            <Route path="/beds" element={<BedsManagement />} />
-            <Route path="/beds/new" element={<BedsCreate />} />
+
+            {/* Admin Only Routes */}
+            <Route
+              path="/users"
+              element={
+                <ProtectedRoute allowedRoles={["admin", "kasir"]}>
+                  <UsersManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/users/new"
+              element={
+                <ProtectedRoute allowedRoles={["admin", "kasir"]}>
+                  <UsersCreate />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/polys"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <PolysManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/polys/new"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <PolysCreate />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/medicines"
+              element={
+                <ProtectedRoute allowedRoles={["apoteker"]}>
+                  <MedicinesManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/medicines/new"
+              element={
+                <ProtectedRoute allowedRoles={["apoteker"]}>
+                  <MedicineCreate />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ward-classes"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <WardClassManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ward-classes/new"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <WardClassCreate />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/beds"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <BedsManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/beds/new"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <BedsCreate />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/inpatients"
+              element={
+                <ProtectedRoute allowedRoles={["kasir"]}>
+                  <InpatientManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/inpatients/new"
+              element={
+                <ProtectedRoute allowedRoles={["kasir"]}>
+                  <InpatientCreate />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/doctor"
               element={
@@ -59,13 +148,60 @@ const PanelPage = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="/doctor/new" element={<DoctorCreate />} />
-            <Route path="/registrations" element={<RegistrationsView />} />
+            <Route
+              path="/doctor/new"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <DoctorCreate />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/registrations/new"
-              element={<RegistrationsCreate />}
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <RegistrationsCreate />
+                </ProtectedRoute>
+              }
             />
-            <Route path="/registrations/self" element={<RegistrationsSelf />} />
+
+            {/* Admin & Patient Routes */}
+            <Route
+              path="/patients"
+              element={
+                <ProtectedRoute allowedRoles={["admin", "kasir"]}>
+                  <PatientsManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/patients/new"
+              element={
+                <ProtectedRoute allowedRoles={["admin", "kasir"]}>
+                  <PatientCreate />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/registrations"
+              element={
+                <ProtectedRoute allowedRoles={["admin", "pasien", "kasir"]}>
+                  <RegistrationsView />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Patient Only Routes */}
+            <Route
+              path="/registrations/self"
+              element={
+                <ProtectedRoute allowedRoles={["pasien"]}>
+                  <RegistrationsSelf />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Doctor Only Routes */}
             <Route
               path="/queue"
               element={

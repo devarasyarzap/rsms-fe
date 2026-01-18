@@ -12,7 +12,12 @@ const RegistrationsView = () => {
   const fetchRegistrations = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_BASE_URL}/api/registrations`, {
+      const API_URL =
+        user.role === "pasien"
+          ? `${API_BASE_URL}/api/registrations/self`
+          : `${API_BASE_URL}/api/registrations`;
+
+      const response = await fetch(API_URL, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -38,7 +43,7 @@ const RegistrationsView = () => {
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition-colors shadow-lg hover:shadow-xl"
           >
             <IoAdd className="w-5 h-5" />
-            Registrasions Visit
+            Registrations Visit
           </button>
         ) : (
           <button
