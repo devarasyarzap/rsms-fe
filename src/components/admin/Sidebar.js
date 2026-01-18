@@ -5,32 +5,80 @@ import { GiMedicines } from "react-icons/gi";
 import { HiDotsVertical } from "react-icons/hi";
 import { FaHospital, FaHospitalUser } from "react-icons/fa";
 import { FaUserDoctor } from "react-icons/fa6";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
-  const [userData, setUserData] = useState(null);
+  const { user } = useAuth();
 
-  useEffect(() => {
-    // Ambil data user dari localStorage
-    const user = localStorage.getItem("user");
-    if (user) {
-      setUserData(JSON.parse(user));
-    }
-  }, []);
+  // Menu untuk setiap role
+  const menuByRole = {
+    admin: [
+      { name: "Dashboard", href: "/panel", icon: HiHome },
+      { name: "Users", href: "/panel/users", icon: HiUsers },
+      { name: "Doctor", href: "/panel/doctor", icon: FaUserDoctor },
+      { name: "Patients", href: "/panel/patients", icon: FaHospitalUser },
+      { name: "Polyclinics", href: "/panel/polys", icon: FaHospital },
+      { name: "Medicines", href: "/panel/medicines", icon: GiMedicines },
+      {
+        name: "Registrations",
+        href: "/panel/registrations",
+        icon: HiClipboardList,
+      },
+    ],
+    dokter: [
+      { name: "Dashboard", href: "/panel", icon: HiHome },
+      { name: "Patients", href: "/panel/patients", icon: FaHospitalUser },
+      {
+        name: "Registrations",
+        href: "/panel/registrations",
+        icon: HiClipboardList,
+      },
+    ],
+    apoteker: [
+      { name: "Dashboard", href: "/panel", icon: HiHome },
+      { name: "Medicines", href: "/panel/medicines", icon: GiMedicines },
+    ],
+    kasir: [
+      { name: "Dashboard", href: "/panel", icon: HiHome },
+      { name: "Patients", href: "/panel/patients", icon: FaHospitalUser },
+    ],
+    pasien: [{ name: "Dashboard", href: "/panel", icon: HiHome }],
+  };
 
-  const navigation = [
-    { name: "Dashboard", href: "/admin", icon: HiHome },
-    { name: "Users", href: "/admin/users", icon: HiUsers },
-    { name: "Doctor", href: "/admin/doctor", icon: FaUserDoctor },
-    { name: "Patients", href: "/admin/patients", icon: FaHospitalUser },
-    { name: "Polyclinics", href: "/admin/polys", icon: FaHospital },
-    { name: "Medicines", href: "/admin/medicines", icon: GiMedicines },
-    {
-      name: "Registrations",
-      href: "/admin/registrations",
-      icon: HiClipboardList,
+  // Dapatkan navigation berdasarkan role user
+  const navigation = menuByRole[user?.role] || menuByRole.admin;
+
+  // Tentukan base path dan title berdasarkan role
+  const roleConfig = {
+    admin: {
+      basePath: "/panel",
+      title: "RSMS Panel",
+      subtitle: "Admin Dashboard",
     },
-  ];
+    dokter: {
+      basePath: "/panel",
+      title: "RSMS Panel",
+      subtitle: "Dokter Dashboard",
+    },
+    apoteker: {
+      basePath: "/panel",
+      title: "RSMS Panel",
+      subtitle: "Apoteker Dashboard",
+    },
+    kasir: {
+      basePath: "/panel",
+      title: "RSMS Panel",
+      subtitle: "Kasir Dashboard",
+    },
+    pasien: {
+      basePath: "/panel",
+      title: "RSMS Panel",
+      subtitle: "Pasien Portal",
+    },
+  };
+
+  const config = roleConfig[user?.role] || roleConfig.admin;
 
   return (
     <>
@@ -56,9 +104,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </div>
             <div>
               <h1 className="text-lg font-semibold text-gray-900">
-                RSMS Panel
+                {config.title}
               </h1>
-              <p className="text-xs text-gray-500">Admin Dashboard</p>
+              <p className="text-xs text-gray-500">{config.subtitle}</p>
             </div>
           </div>
 
@@ -88,15 +136,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
                 <span className="text-white font-semibold text-sm">
-                  {userData?.username?.substring(0, 2).toUpperCase() || "AD"}
+                  {user?.name?.substring(0, 2).toUpperCase() ||
+                    user?.username?.substring(0, 2).toUpperCase() ||
+                    "U"}
                 </span>
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate capitalize">
-                  {userData?.username || "Admin"}
+                  {user?.name || user?.username || "User"}
                 </p>
                 <p className="text-xs text-gray-500 truncate capitalize">
-                  {userData?.role || "Administrator"}
+                  {user?.role || "User"}
                 </p>
               </div>
               <button className="text-gray-400 hover:text-gray-600">

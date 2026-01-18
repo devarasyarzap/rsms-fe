@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useAuth } from "../contexts/AuthContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -54,12 +56,12 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Simpan token dan user data
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+        // Gunakan login dari AuthContext untuk otomatis redirect berdasarkan role
+        login(data.token, data.user);
 
-        // Redirect ke admin panel
-        navigate("/admin");
+        toast.success(`Selamat datang, ${data.user.username}!`, {
+          duration: 3000,
+        });
       } else {
         setError(
           data.message || "Login failed. Please check your credentials.",

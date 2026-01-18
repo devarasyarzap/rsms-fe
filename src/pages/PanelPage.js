@@ -15,8 +15,9 @@ import MedicineCreate from "../components/admin/Medicine/MedicineCreate";
 import DoctorManagement from "../components/admin/Doctor/DoctorManagement";
 import DoctorCreate from "../components/admin/Doctor/DoctorCreate";
 import RegistrationsCreate from "../components/admin/Registrations/RegistrationsCreate";
+import ProtectedRoute from "../components/ProtectedRoute";
 
-const AdminPage = () => {
+const PanelPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -39,7 +40,14 @@ const AdminPage = () => {
             <Route path="/patients/new" element={<PatientCreate />} />
             <Route path="/medicines" element={<MedicinesManagement />} />
             <Route path="/medicines/new" element={<MedicineCreate />} />
-            <Route path="/doctor" element={<DoctorManagement />} />
+            <Route
+              path="/doctor"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <DoctorManagement />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/doctor/new" element={<DoctorCreate />} />
             <Route path="/registrations" element={<RegistrationsView />} />
             <Route
@@ -53,4 +61,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default PanelPage;
