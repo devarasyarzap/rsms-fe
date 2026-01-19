@@ -20,6 +20,31 @@ const Overview = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const patientsData = await patientsRes.json();
+      const doctorsRes = await fetch(`${API_BASE_URL}/api/master/doctors`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const doctorsData = await doctorsRes.json();
+      const registrationsRes = await fetch(
+        `${API_BASE_URL}/api/registrations`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+      const registrationsData = await registrationsRes.json();
+
+      const todayRegistrations =
+        registrationsData.data?.filter((item) => {
+          if (!item.createdAt) return false;
+
+          const itemDate = new Date(item.createdAt);
+          const today = new Date();
+
+          return (
+            itemDate.getDate() === today.getDate() &&
+            itemDate.getMonth() === today.getMonth() &&
+            itemDate.getFullYear() === today.getFullYear()
+          );
+        }) || [];
 
       const medicinesRes = await fetch(
         `${API_BASE_URL}/api/pharmacy/medicines`,
@@ -31,8 +56,8 @@ const Overview = () => {
 
       setStats({
         totalPatients: patientsData.data?.length || 0,
-        totalDoctors: 0,
-        totalRegistrations: 0,
+        totalDoctors: doctorsData.data?.length || 0,
+        totalRegistrations: todayRegistrations.length || 0,
         totalMedicines: medicinesData.data?.length || 0,
       });
     } catch (error) {
