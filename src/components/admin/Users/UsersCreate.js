@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   IoChevronBack,
   IoAlertCircle,
@@ -53,11 +54,18 @@ const UsersCreate = () => {
         },
       );
 
+      const data = await response.json();
+
       if (response.ok) {
+        toast.success(data.message || "User created successfully!", {
+          duration: 3000,
+        });
         navigate("/panel/users");
       } else {
-        const data = await response.json();
         setError(data.message || "Failed to save users");
+        toast.error(data.message || "Failed to save users", {
+          duration: 3000,
+        });
       }
     } catch (error) {
       console.error("Error saving users:", error);

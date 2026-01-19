@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   IoChevronBack,
   IoAlertCircle,
@@ -48,11 +49,18 @@ const PolysCreate = () => {
         },
       );
 
+      const data = await response.json();
+
       if (response.ok) {
+        toast.success(data.message || "Polyclinic created successfully!", {
+          duration: 3000,
+        });
         navigate("/panel/polys");
       } else {
-        const data = await response.json();
         setError(data.message || "Failed to save polys. Please try again.");
+        toast.error(data.message || "Failed to save polys.", {
+          duration: 3000,
+        });
       }
     } catch (error) {
       console.error("Error saving polys:", error);

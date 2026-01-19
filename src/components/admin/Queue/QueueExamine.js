@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   IoChevronBack,
   IoAlertCircle,
@@ -52,13 +53,20 @@ const QueueExamine = () => {
         },
       );
 
+      const data = await response.json();
+
       if (response.ok) {
+        toast.success(data.message || "Examination completed successfully!", {
+          duration: 3000,
+        });
         navigate("/panel/queue");
       } else {
-        const data = await response.json();
         setError(
           data.message || "Failed to create registration. Please try again.",
         );
+        toast.error(data.message || "Failed to save examination.", {
+          duration: 3000,
+        });
       }
     } catch (error) {
       console.error("Error creating registration:", error);

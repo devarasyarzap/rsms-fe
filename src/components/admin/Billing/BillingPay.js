@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   IoChevronBack,
   IoAlertCircle,
@@ -80,13 +81,20 @@ const BillingPay = () => {
         }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
+        toast.success(data.message || "Payment processed successfully!", {
+          duration: 3000,
+        });
         navigate("/panel/billing");
       } else {
-        const data = await response.json();
         setError(
           data.message || "Failed to process payment. Please try again.",
         );
+        toast.error(data.message || "Failed to process payment.", {
+          duration: 3000,
+        });
       }
     } catch (error) {
       console.error("Error processing payment:", error);

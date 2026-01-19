@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   IoChevronBack,
   IoAlertCircle,
@@ -51,11 +52,18 @@ const MedicineCreate = () => {
         },
       );
 
+      const data = await response.json();
+
       if (response.ok) {
+        toast.success(data.message || "Medicine created successfully!", {
+          duration: 3000,
+        });
         navigate("/panel/medicines");
       } else {
-        const data = await response.json();
         setError(data.message || "Failed to save patient");
+        toast.error(data.message || "Failed to save medicine.", {
+          duration: 3000,
+        });
       }
     } catch (error) {
       console.error("Error saving patient:", error);

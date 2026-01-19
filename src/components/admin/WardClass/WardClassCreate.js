@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   IoChevronBack,
   IoAlertCircle,
@@ -45,11 +46,18 @@ const WardClassCreate = () => {
         },
       );
 
+      const data = await response.json();
+
       if (response.ok) {
+        toast.success(data.message || "Ward class created successfully!", {
+          duration: 3000,
+        });
         navigate("/panel/ward-classes");
       } else {
-        const data = await response.json();
         setError(data.message || "Failed to save ward classes");
+        toast.error(data.message || "Failed to save ward classes.", {
+          duration: 3000,
+        });
       }
     } catch (error) {
       console.error("Error saving ward classes:", error);
