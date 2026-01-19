@@ -9,6 +9,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { MdOutlineClass, MdQueue } from "react-icons/md";
 import { LiaBedSolid } from "react-icons/lia";
 import { PiHospitalThin } from "react-icons/pi";
+import { IoDocument, IoCash } from "react-icons/io5";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
@@ -50,12 +51,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     apoteker: [
       { name: "Dashboard", href: "/panel", icon: HiHome },
       { name: "Medicines", href: "/panel/medicines", icon: GiMedicines },
+      {
+        name: "Medical Records",
+        href: "/panel/medical-record",
+        icon: IoDocument,
+      },
     ],
     kasir: [
       { name: "Dashboard", href: "/panel", icon: HiHome },
       { name: "Users", href: "/panel/users", icon: HiUsers },
       { name: "Patients", href: "/panel/patients", icon: FaHospitalUser },
       { name: "Inpatients", href: "/panel/inpatients", icon: PiHospitalThin },
+      { name: "Billing", href: "/panel/billing", icon: IoCash },
     ],
     pasien: [
       { name: "Dashboard", href: "/panel", icon: HiHome },

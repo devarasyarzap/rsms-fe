@@ -25,6 +25,11 @@ import BedsManagement from "../components/admin/Beds/BedsManagement";
 import BedsCreate from "../components/admin/Beds/BedsCreate";
 import InpatientManagement from "../components/admin/Inpatient/InpatientManagement";
 import InpatientCreate from "../components/admin/Inpatient/InpatientCreate";
+import MedicalRecordManagement from "../components/admin/MedicalRecord/MedicalRecordManagement";
+import MedicalRecordDispense from "../components/admin/MedicalRecord/MedicalRecordDispense";
+import BillingManagement from "../components/admin/Billing/BillingManagement";
+import BillingPay from "../components/admin/Billing/BillingPay";
+import BillingGenerate from "../components/admin/Billing/BillingGenerate";
 
 const PanelPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -215,6 +220,50 @@ const PanelPage = () => {
               element={
                 <ProtectedRoute allowedRoles={["dokter"]}>
                   <QueueExamine />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Apoteker Only Routes */}
+            <Route
+              path="/medical-record"
+              element={
+                <ProtectedRoute allowedRoles={["apoteker"]}>
+                  <MedicalRecordManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/medical-record/dispense/:id"
+              element={
+                <ProtectedRoute allowedRoles={["apoteker"]}>
+                  <MedicalRecordDispense />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Kasir Only Routes */}
+            <Route
+              path="/billing"
+              element={
+                <ProtectedRoute allowedRoles={["kasir"]}>
+                  <BillingManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/billing/generate"
+              element={
+                <ProtectedRoute allowedRoles={["kasir"]}>
+                  <BillingGenerate />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/billing/pay/:id"
+              element={
+                <ProtectedRoute allowedRoles={["kasir"]}>
+                  <BillingPay />
                 </ProtectedRoute>
               }
             />
